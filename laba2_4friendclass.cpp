@@ -16,8 +16,13 @@ class Automobile
 public:
     friend void printInfo(Automobile &automobile);
     friend class Sto;
+    int ID;
 
-    Automobile(const int id = 0, const string name = "", const double mileage = 0){};
+    Automobile(const int _id, string _name, double _mileage) : name(_name), mileage(_mileage)
+    {
+        ID = ++id;
+    };              //конструктор инициализации
+    Automobile(){}; //конструктор по умолчанию
     ~Automobile()
     {
         name.clear();
@@ -54,41 +59,64 @@ public:
 void printInfo(Automobile &automobile)
 {
     cout << "-----------------------------" << endl;
-    cout << "id - " << automobile.id << endl
+    cout << "ID - " << automobile.id++ << endl
          << "Name - " << automobile.name << endl
-         << "mileage - " << automobile.mileage << endl;
+         << "Mileage - " << automobile.mileage << endl;
     cout << "-----------------------------" << endl;
+}
+
+int prov_int(int num)
+{
+    while (true)
+    {
+        rewind(stdin);
+        if ((cin >> num) && num > 1 && !cin.fail())
+            break;
+        cin.clear();
+        cin.ignore(32767, '\n');
+    }
+    return (num);
+}
+
+double prov_double(double num)
+{
+    while (true)
+    {
+        rewind(stdin);
+        if ((cin >> num) && num > 1 && !cin.fail())
+            break;
+        cin.clear();
+        cin.ignore(32767, '\n');
+    }
+    return (num);
 }
 
 int main()
 {
     int carNum = 0;
 
-    while (true)
-    {
-        cout << "Please, enter a number of the automobiles: ";
-        fflush(stdin);
-        cin >> carNum;
-        if (carNum > 0)
-            break;
-    }
+    cout << "PPPPPPlease, enter a number of the cars: ";
+    carNum = prov_int(carNum);
 
     Automobile *car = new Automobile[carNum];
     Sto sto;
     double _mileage;
+    string _name;
+    int _id;
+    cout << "ID: " << endl;
+    _id = prov_int(_id);
+
     for (int i = 0; i < carNum; i++)
     {
-        string _name;
-        int _id;
-        cout << "id:" << endl;
-        cin >> _id;
-        cout << "mileage: " << endl;
-        cin >> _mileage;
-        cout << "name:" << endl;
+        cout << i + 1 << endl;
+        cout << "Car's mileage: " << endl;
+        _mileage = prov_double(_mileage);
+        cout << "Owner's name:  " << endl;
         cin >> _name;
         car[i].setName(_name);
-        car[i].setId(_id);
         sto.setMileage(car[i], _mileage);
+        cout << endl;
+        car[i].setId(_id);
     }
 
     for (int i = 0; i < carNum; i++)
@@ -104,10 +132,10 @@ int main()
     cin >> chooser;
     if (chooser)
     {
-        cout << "Choose num of editable auto" << endl;
+        cout << "Choose num of editable auto:  ";
         int num = checkNum(car, carNum) - 1;
-        cout << "Enter mileage" << endl;
-        cin >> _mileage;
+        cout << "Enter mileage: " << endl;
+        _mileage = prov_double(_mileage);
         sto.setMileage(car[num], _mileage);
     }
 
