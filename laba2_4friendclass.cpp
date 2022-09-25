@@ -106,7 +106,7 @@ int main()
     {
         cout << "Choose num of editable auto" << endl;
         int num = checkNum(car, carNum) - 1;
-        cout << "mileage" << endl;
+        cout << "Enter mileage" << endl;
         cin >> _mileage;
         sto.setMileage(car[num], _mileage);
     }
