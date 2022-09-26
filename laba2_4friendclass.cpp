@@ -16,11 +16,10 @@ class Automobile
 public:
     friend void printInfo(Automobile &automobile);
     friend class Sto;
-    int ID;
 
     Automobile(const int _id, string _name, double _mileage) : name(_name), mileage(_mileage)
     {
-        ID = ++id;
+        id = _id;
     };              //конструктор инициализации
     Automobile(){}; //конструктор по умолчанию
     ~Automobile()
@@ -46,8 +45,7 @@ void Automobile::setId(const int _id)
 
 class Sto
 {
-    Automobile car;
-
+    // Automobile car;
 public:
     void setMileage(Automobile &car, double _mileage)
     {
@@ -95,7 +93,7 @@ int main()
 {
     int carNum = 0;
 
-    cout << "PPPPPPlease, enter a number of the cars: ";
+    cout << "Please, enter a number of the cars: ";
     carNum = prov_int(carNum);
 
     Automobile *car = new Automobile[carNum];
@@ -109,7 +107,7 @@ int main()
     for (int i = 0; i < carNum; i++)
     {
         cout << i + 1 << endl;
-        cout << "Car's mileage: " << endl;
+        cout << "Car's mlileage: " << endl;
         _mileage = prov_double(_mileage);
         cout << "Owner's name:  " << endl;
         cin >> _name;
@@ -146,8 +144,11 @@ int main()
         cout << "Num - " << i + 1 << endl;
         printInfo(car[i]);
     }
-    getchar();
     delete[] car;
+    ~Automobile()
+    {
+        cout << "TTT";
+    };
     return 0;
 }
 
