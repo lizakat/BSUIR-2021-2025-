@@ -94,6 +94,7 @@ public:
             for (int i = 0; i < size - 1; i++)
             {
                 array[i] = array[i + 1];
+                // throw(1);
             }
             size--;
             rear--;
@@ -104,6 +105,10 @@ public:
             cout << ex.ShowException() << endl;
             return;
         }
+        /*  catch (...)
+         {
+             unexpected();
+         } */
     }
     void out()
     {
@@ -155,13 +160,13 @@ public:
 void myUnexpected()
 {
     cout << "My unexpected()" << endl;
-    exit(1);
+    abort();
 }
 
 void myTerminate()
 {
     cout << "My terminate()";
-    exit(1);
+    abort();
 }
 
 int main()
