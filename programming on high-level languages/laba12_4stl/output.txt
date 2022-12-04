@@ -1,0 +1,4 @@
+Line № 1: 1words that contains symbols 'abc'
+Line № 2: 1words that contains symbols 'abc'
+Line № 3: 0words that contains symbols 'abc'
+Line № 4: 1words that contains symbols 'abc'
