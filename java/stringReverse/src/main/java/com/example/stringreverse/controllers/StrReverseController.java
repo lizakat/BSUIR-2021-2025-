@@ -36,11 +36,16 @@ public class StrReverseController {
                 logger.error("Input string is empty");
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Input string is empty");
             }
+            if(str.equals("1010")){
+                logger.error("Internal server error");
+                throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "500 error");
+            }
             logger.info("Count request received: string={}, result={}", str, new StrReverser(str).string());
             cache.put(str, new StrReverser(str).string());
             count.increment();
             logger.info("Number of requests = {}", count.getCount());
             return new StrReverser(str);
+
         } catch (ResponseStatusException e) {
             logger.error("Client error: {}", e.getMessage());
             throw e;
