@@ -1,6 +1,7 @@
 package com.example.stringreverse.controllers;
 
 import com.example.stringreverse.dto.BulkParam;
+import com.example.stringreverse.dto.BulkStrReverseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,11 +20,19 @@ public class BulkStrReverseController {
     }
 
     @PostMapping("/bulk")
-    public List<String> bulk(@RequestBody List<BulkParam> params) {
+    public BulkStrReverseResult bulk(@RequestBody List<BulkParam> params) {
         List<String> results = params.stream()
                 .map(param -> strReverseController.strReverse(param.getString()).string())
                 .collect(Collectors.toList());
 
-        return results;
+        int requestCount = results.size();
+        int totalCount = results.stream().mapToInt(String::length).sum();
+        double avgCount = results.stream().mapToInt(String::length).average().orElse(0);
+        int maxCount = results.stream().mapToInt(String::length).max().orElse(0);
+        int minCount = results.stream().mapToInt(String::length).min().orElse(0);
+
+
+        BulkStrReverseResult result = new BulkStrReverseResult(results, requestCount, totalCount, avgCount, maxCount, minCount);
+        return result;
     }
 }
