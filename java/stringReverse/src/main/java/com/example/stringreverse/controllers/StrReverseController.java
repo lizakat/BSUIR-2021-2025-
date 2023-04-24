@@ -5,7 +5,6 @@ import com.example.stringreverse.annotation.StrReverser;
 import com.example.stringreverse.cache.Cache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,6 @@ public class StrReverseController {
     private final Counter count;
     private static final Logger logger = LoggerFactory.getLogger(StrReverseController.class);
 
-    @Autowired
     public StrReverseController(Cache cache, Counter count) {
         this.cache = cache;
         this.count = count;
@@ -36,7 +34,7 @@ public class StrReverseController {
                 logger.error("Input string is empty");
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Input string is empty");
             }
-            if(str.equals("1010")){
+            if (str.length() == 1) {
                 logger.error("Internal server error");
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "500 error");
             }

@@ -4,7 +4,6 @@ import com.example.stringreverse.annotation.StrReverser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class StrReverseControllerTest {
     @Test
@@ -12,4 +11,5 @@ public class StrReverseControllerTest {
         assertEquals("cba", new StrReverser("abc").string());
         assertEquals("", new StrReverser("").string());
     }
+
 }

@@ -5,11 +5,11 @@ import org.springframework.stereotype.Component;
 public class Counter {
     private int count = 0;
 
-    public int increment() {
+    public synchronized  int increment() {
         return ++count;
     }
 
-    public int getCount() {
+    public synchronized int getCount() {
         return count;
     }
 }
